@@ -1,5 +1,14 @@
-import subprocess
+import sqlite3
 
-user_input = input("Enter a command: ")
+conn = sqlite3.connect("example.db")
+cursor = conn.cursor()
 
-subprocess.call(user_input, shell=True)
+username = input("Enter username: ")
+
+query = "SELECT * FROM users WHERE username = '" + username + "'"
+
+cursor.execute(query)
+
+print(cursor.fetchall())
+
+conn.close()
